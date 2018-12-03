@@ -7,6 +7,8 @@
 // @match        https://www.itnetwork.cz/administracni-sekce
 // @match        https://www.itnetwork.cz/administracni-sekce/*
 // @grant        none
+// @downloadURL  https://raw.githubusercontent.com/stechy1/itn_article_history/master/articleHistory.js
+// @updateURL    https://raw.githubusercontent.com/stechy1/itn_article_history/master/articleHistory.js
 // @require      http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js
 // @require      https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js
 // ==/UserScript==
