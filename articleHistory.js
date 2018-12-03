@@ -2,7 +2,7 @@
 // @name         ITn article stats
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  Jednoduchý addon pro vizualizaci počtu zobrazených/stažených článků za den
+// @description  Jednoduch addon pro vizualizaci počtu zobrazených článků za den
 // @author       You
 // @match        https://www.itnetwork.cz/administracni-sekce
 // @match        https://www.itnetwork.cz/administracni-sekce/*
@@ -18,6 +18,7 @@
     class ArticleManager {
         constructor(container, articlesHistory) {
             this._articlesHistory = articlesHistory;
+            // div id=articleHistoryContainer - kontejner celého mého okna s manažerem
             this._container = container;
             this._chartConfig = this._createBaseConfig();
             this._chart = null;
@@ -32,6 +33,8 @@
                     datasets: [{
                         label: 'Historie prohlížení článků',
                         data: [],
+                        //backgroundColor:
+                        //backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
                         borderColor: "#3e95cd",
                         fill: false
                     },
@@ -146,21 +149,25 @@
         }
     }
 
+    // Your code here...
     const columnIndex_miniature = 0;
     const columnIndex_name = 1;
     const columnIndex_state = 2;
     const columnIndex_downloads = 4;
     const columnIndex_read = 5;
 
-    const historyContainer = $('<div id="articleHistoryContainer" style="position: absolute; top: 20%; left: 25%; width: 50%; height: 70%; max-height: 70%; background: white; -webkit-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.7);-moz-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.7);box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.7);"></div>');
-    const btnStats = $("nav.button-bar.nav-bar ").append('<a href="#"><i class="fa fa-history"></i> Historie</a>');
-    btnStats.click((e) => {
+    const historyContainer = $('<div id="articleHistoryContainer" style="position: absolute; top: 20%; left: 25%; width: 50%; height: 70%; max-height: 70%; background: white; -webkit-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.7);-moz-box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.7);box-shadow: 0px 5px 15px 0px rgba(0,0,0,0.7); display: none;"></div>');
+    const btnStats = $('<a href="#"><i class="fa fa-history"></i> Historie</a>');
+    btnStats[0].onclick = (e) => {
         e.preventDefault();
         historyContainer.toggle();
-    });
+    };
+    $("nav.button-bar.nav-bar ").append(btnStats);
     const articleTotalCount = parseInt($($('*:contains("Napsal jsi")')[7]).text().replace(/[^0-9\.]/g, ''), 10);
     const tables = $('.fancytable').children('tbody');
+    //const todayIndex = new Date(new Date().setDate(23)).toLocaleDateString();
     const todayIndex = new Date().toLocaleDateString();
+    //const todayIndex = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear();
     const articleHistory = JSON.parse(localStorage.getItem("articleHistory")) || [];
     $('article').append(historyContainer);
 
